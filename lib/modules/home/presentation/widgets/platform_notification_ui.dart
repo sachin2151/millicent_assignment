@@ -13,7 +13,7 @@ class PlatformSpecificUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<NotificationController>(builder: (value) {
       return Container(
-        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
         child: Column(
           children: [
             Theme(
@@ -105,6 +105,7 @@ class PlatformSpecificUI extends StatelessWidget {
               color: data?.option == i
                   ? Colors.orange.withOpacity(0.1)
                   : Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: data?.option == i
                     ? Colors.orange.withOpacity(0.5)
