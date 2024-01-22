@@ -1,16 +1,23 @@
-# millicent_assignment
 
-A new Flutter project.
+Information:
 
-## Getting Started
+A Notification Enable/disable an app's functionality and save the user preferences in local storage, which will be displayed the next time the app is opened based on the last selected preference.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Please find sample Images:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="https://github.com/sachin2151/millicent_assignment/assets/53220408/db6f943f-7437-4aba-a9eb-84d40632d5af.type" width="300" height="500">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+Packages/Pluggings/Architecture Used:
+
+- Getx: StateManagment
+- Clean Architecture
+- get_storage: To Store data locally
+
+Note:
+Some dart files is been kept empty just to show the Clean Architecture Flow.
+
+
