@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:millicent_assignment/modules/home/presentation/controllers/home_controller.dart';
+import 'package:millicent_assignment/core/strings.dart';
+import 'package:millicent_assignment/modules/home/presentation/controllers/notification_controller.dart';
 
 class NotificationHeader extends StatelessWidget {
   NotificationHeader({super.key});
 
-  final controller = Get.find<HomeController>();
+  final controller = Get.find<NotificationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +16,14 @@ class NotificationHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "Notifications",
+            GlobalStrings.notifications,
             style: TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          GetBuilder<HomeController>(builder: (value) {
+          GetBuilder<NotificationController>(builder: (value) {
             return IconButton(
               onPressed: () {
-                controller.notificationEnabled =
-                    !controller.notificationEnabled;
-                controller.update();
+                controller.mainNotificationToggle();
               },
               icon: Icon(
                 controller.notificationEnabled

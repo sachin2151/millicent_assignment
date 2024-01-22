@@ -36,18 +36,21 @@ class PlatformListModel {
 
 class Options {
   String? title;
+  String? description;
   bool? selected;
 
-  Options({this.title, this.selected});
+  Options({this.title, this.selected, this.description});
 
   Options.fromJson(Map<String, dynamic> json) {
     title = json['title'];
+    description = json['description'];
     selected = json['is_selected'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = title;
+    data['description'] = description;
     data['is_selected'] = selected;
     return data;
   }

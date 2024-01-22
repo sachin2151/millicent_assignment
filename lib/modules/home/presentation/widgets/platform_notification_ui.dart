@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:millicent_assignment/modules/home/data/models/platform_list_model.dart';
-import 'package:millicent_assignment/modules/home/presentation/controllers/home_controller.dart';
+import 'package:millicent_assignment/modules/home/presentation/controllers/notification_controller.dart';
 
 class PlatformSpecificUI extends StatelessWidget {
   PlatformSpecificUI({super.key, required this.data, required this.index});
 
   final PlatformListModel? data;
   final int index;
-  final controller = Get.find<HomeController>();
+  final controller = Get.find<NotificationController>();
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (value) {
+    return GetBuilder<NotificationController>(builder: (value) {
       return Container(
         margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: Column(
@@ -23,9 +23,8 @@ class PlatformSpecificUI extends StatelessWidget {
                 initiallyExpanded: data?.expanded ?? false,
                 tilePadding: const EdgeInsets.fromLTRB(0, 0, 38, 0),
                 onExpansionChanged: (value) {
-                  controller.notificationOptionsData[index].expanded =
-                      !(data?.expanded ?? false);
-                  controller.update();
+                  /// Open close expansion tile
+                  controller.expandExpansionTile(index);
                 },
                 trailing:
                     controller.notificationOptionsData[index].enabled ?? false
@@ -58,9 +57,8 @@ class PlatformSpecificUI extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          controller.notificationOptionsData[index].enabled =
-                              !(data?.enabled ?? false);
-                          controller.update();
+                          /// Platform Toggle enable / disable
+                          controller.platformToggle(index);
                         },
                         child: Icon(
                           data?.enabled ?? false
@@ -76,14 +74,8 @@ class PlatformSpecificUI extends StatelessWidget {
                 children:
                     controller.notificationOptionsData[index].enabled ?? false
                         ? [
-                            optionSelectWidget(
-                                context,
-                                "Get notified on every tweet as and when happens",
-                                0),
-                            optionSelectWidget(
-                                context,
-                                "Hourly summary of volumes on various platforms",
-                                1),
+                            optionSelectWidget(context, 0),
+                            optionSelectWidget(context, 1),
                           ]
                         : [],
               ),
@@ -101,11 +93,12 @@ class PlatformSpecificUI extends StatelessWidget {
     });
   }
 
-  Widget optionSelectWidget(BuildContext context, String description, int i) {
+  /// Platform Options UI
+  Widget optionSelectWidget(BuildContext context, int i) {
     return GestureDetector(
       onTap: () {
-        controller.notificationOptionsData[index].option = i;
-        controller.update();
+        /// Save selected options
+        controller.saveSelectedOption(index, i);
       },
       child: Container(
           decoration: BoxDecoration(
@@ -131,7 +124,7 @@ class PlatformSpecificUI extends StatelessWidget {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.7,
-                    child: Text(description),
+                    child: Text(data?.options?[i].description ?? ""),
                   ),
                 ],
               ),
